@@ -1,0 +1,14 @@
+<h2>投稿しなさい</h2>
+<form [formGroup]="form">
+    <div>
+        <input formControlName="contents">
+        <button (click)="postMessage()">投稿</button>
+    </div>
+    <div *ngIf="messages">
+        <ul>
+            <li *ngFor="let message of messages">
+                {{message.id}}:{{message.contents}}
+            </li>
+        </ul>
+    </div>
+</form>
