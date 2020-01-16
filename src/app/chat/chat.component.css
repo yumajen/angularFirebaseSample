@@ -1,0 +1,10 @@
+ul {
+    padding-left: 0;
+}
+li {
+    width: 30vw;
+    list-style: none;
+    margin-top: 3px;
+    background-color: #e7fadc;
+    border-radius: 5px;
+}
