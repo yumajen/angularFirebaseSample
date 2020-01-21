@@ -13,7 +13,6 @@ export class ChatComponent implements OnInit {
   messages: Message[] = [];
   numberOfMessages: number = 0;
   form = this.fb.group({
-    id: this.numberOfMessages + 1,
     contents: [''],
   });
 
@@ -36,9 +35,9 @@ export class ChatComponent implements OnInit {
 
   postMessage(): void {
     this.messageService.postMessages(this.form.value as Message)
-      .subscribe(() => {
-        this.getMessages();
-        this.form.reset();
-      });
+    // .subscribe(() => {
+    //   this.getMessages();
+    //   this.form.reset();
+    // });
   }
 }
