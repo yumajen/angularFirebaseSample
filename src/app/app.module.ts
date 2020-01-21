@@ -8,6 +8,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { MockWebApiService } from './mock-web-api.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { environment } from '../environments/environment';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
@@ -19,6 +22,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(MockWebApiService),
   ],
