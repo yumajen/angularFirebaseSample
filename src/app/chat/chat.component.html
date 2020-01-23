@@ -2,13 +2,31 @@
 <form [formGroup]="form">
     <div>
         <input formControlName="contents">
-        <button (click)="postMessage()">投稿</button>
-    </div>
-    <div *ngIf="messages">
-        <ul>
-            <li *ngFor="let message of messages">
-                {{message.contents}}
-            </li>
-        </ul>
+        <button (click)="createMessage()">投稿</button>
     </div>
 </form>
+<div *ngIf="messages">
+    <table>
+        <tbody>
+            <tr *ngFor="let message of messages; index as i">
+                <td class="message">
+                    <p *ngIf="!isEdit(message)" class="contents">{{message.contents}}</p>
+                    <textarea *ngIf="isEdit(message)" class="textarea" value="{{message.contents}}"
+                        (blur)="setUpdateParam(message, contents.value)" #contents></textarea>
+                    <p class="sub-info">
+                        {{message.createdAt | date: 'yyyy/MM/dd HH:mm:SS'}}
+                        <mat-icon *ngIf="!isEdit(message)" class="edit" (click)="editMessage(message)">edit
+                        </mat-icon>
+                        <mat-icon *ngIf="isEdit(message)" class="edit" (click)="updateMessage(message)">
+                            save
+                        </mat-icon>
+                        <mat-icon *ngIf="isEdit(message)" class="cancel" (click)="cancelEditing(message)">
+                            cancel
+                        </mat-icon>
+                        <mat-icon class="delete" (click)="deleteMessage(message)">delete</mat-icon>
+                    </p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

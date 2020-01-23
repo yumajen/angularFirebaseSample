@@ -11,6 +11,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -22,10 +24,12 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    MatIconModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(MockWebApiService),
+    BrowserAnimationsModule,
   ],
   providers: [MockWebApiService],
   bootstrap: [AppComponent]
