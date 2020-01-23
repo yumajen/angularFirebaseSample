@@ -1,36 +1,43 @@
 import { Injectable } from '@angular/core';
-// import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Message } from './message';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessageService {
-  // private url = 'api/messages';
-  // private httpOptions = {
-  //   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  // };
+
+  // messagesコレクション、ドキュメントのリファレンス
+  private messagesCollection: AngularFirestoreCollection<Message>
 
   constructor(
-    // private http: HttpClient,
     private db: AngularFirestore,
-  ) { }
-
-  getMessages(): Observable<any[]> {
-    // messagesコレクションのリファレンス
-    const messagesRef = this.db.collection('messages');
-    return messagesRef.valueChanges();
-    // return this.http.get<Message[]>(this.url);
-    // エラーハンドリングは省略
+  ) {
+    // orderBy()などのクエリを使用することも可能
+    this.messagesCollection = db.collection<Message>('messages', ref => ref.orderBy('createdAt', 'desc'));
   }
 
-  postMessages(message: Message) {
-    // messagesコレクションのリファレンス
-    const messagesRef = this.db.collection('messages');
-    messagesRef.add(message);
-    // return this.http.post<Message>(this.url, message, this.httpOptions);
-    // エラーハンドリングは省略
+  getMessages(): Observable<Message[]> {
+    return this.messagesCollection.valueChanges();
+  }
+
+  createMessages(param: Message): Promise<void> {
+    // idを自動生成するメソッドのcreatedId()を使用
+    const id = this.db.createId();
+    const item: Message = {
+      id,
+      contents: param.contents,
+      createdAt: Date.now(),
+    }
+    return this.messagesCollection.doc(id).set(item)
+  }
+
+  updateMessage(param: Message): Promise<void> {
+    return this.messagesCollection.doc(param.id).update(param);
+  }
+
+  deleteMessage(param: Message): Promise<void> {
+    return this.messagesCollection.doc(param.id).delete();
   }
 }

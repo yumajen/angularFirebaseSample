@@ -1,10 +1,44 @@
-ul {
+table {
     padding-left: 0;
 }
-li {
+td.message {
     width: 30vw;
     list-style: none;
     margin-top: 3px;
     background-color: #e7fadc;
     border-radius: 5px;
+}
+p.contents {
+    margin-bottom: 0;
+    font-size: 15px;
+}
+p.sub-info {
+    margin-top: 0;
+    margin-bottom: 2px;
+    height: 20%;
+    vertical-align: middle;
+    font-size: 13px;
+    color: #858585;
+    text-align: right;
+}
+textarea {
+    margin-left: 5px;
+    margin-top: 5px;
+    height: 35px;
+    width: 96%;
+}
+mat-icon {
+    font-size: 20px;
+}
+mat-icon:hover {
+    cursor: pointer;
+}
+mat-icon.edit:hover {
+    color: #60fa75;
+}
+mat-icon.cancel:hover {
+    color: #ff0000;
+}
+mat-icon.delete:hover {
+    color: #ff0000;
 }
