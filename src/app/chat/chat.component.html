@@ -20,7 +20,7 @@
                         <mat-icon *ngIf="isEdit(message)" class="edit" (click)="updateMessage(message)">
                             save
                         </mat-icon>
-                        <mat-icon *ngIf="isEdit(message)" class="cancel" (click)="cancelEditing(message)">
+                        <mat-icon *ngIf="isEdit(message)" class="cancel" (click)="cancelEditing()">
                             cancel
                         </mat-icon>
                         <mat-icon class="delete" (click)="deleteMessage(message)">delete</mat-icon>
